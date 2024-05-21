@@ -1,5 +1,11 @@
+import 'dart:ffi';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:newsappassignment/Services/News/NewsServices.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:newsappassignment/Presentation/Category/CategoryScreen.dart';
+import 'package:newsappassignment/Services/News/news_services_bloc_bloc.dart';
+import 'package:newsappassignment/Widgets/NewsCard.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -9,6 +15,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  double showcount = 0.1;
+  final ScrollController sc = ScrollController();
+
   List<String> newsCategories = [
     'Top Headlines',
     'World News',
@@ -22,18 +31,22 @@ class _HomeScreenState extends State<HomeScreen> {
     'Sports',
     'Entertainment',
   ];
+  @override
+  void initState() {
+    super.initState();
+    sc.addListener(scrolllissner);
+  }
 
   @override
   Widget build(BuildContext context) {
-    NewsServices.fetchNews("a");
     return SafeArea(
       child: Scaffold(
         body: Column(
           children: [
-          const  Row(
+            const Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left:18.0),
+                  padding: const EdgeInsets.only(left: 18.0),
                   child: Text(
                     "Categories",
                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
@@ -51,20 +64,29 @@ class _HomeScreenState extends State<HomeScreen> {
                     return Container(
                       height: 50,
                       width: 120,
-                      child: Card(
-                        child: Center(
-                            child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(newsCategories[ind]),
-                        )),
+                      child: InkWell(
+                        onTap: () {
+
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => CategoryScreen(
+                                    category: newsCategories[ind],
+                                  )));
+                        },
+                        child: Card(
+                          child: Center(
+                              child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(newsCategories[ind]),
+                          )),
+                        ),
                       ),
                     );
                   }),
             ),
-                      const  Row(
+            const Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left:18.0),
+                  padding: const EdgeInsets.only(left: 18.0),
                   child: Text(
                     "Breaking News",
                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
@@ -72,10 +94,41 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-
+            BlocBuilder<NewsServicesBlocBloc, NewsServicesBlocState>(
+                builder: (context, state) {
+              if (state is NewsServicesBlocsuccess) {
+                return Container(
+                  height: MediaQuery.of(context).size.height / 1.5,
+                  width: MediaQuery.of(context).size.width,
+                  child: ListView.builder(
+                      controller: sc,
+                      itemCount: min(
+                          state.newsServices.articles!.length,
+                          (state.newsServices.articles!.length * showcount)
+                              .toInt()),
+                      itemBuilder: (context, ind) {
+                        return newscard(state.newsServices.articles![ind]);
+                      }),
+                );
+              } else {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            })
           ],
         ),
       ),
     );
+  }
+
+  void scrolllissner() {
+    if (sc.position.pixels == sc.position.maxScrollExtent) {
+      if (showcount < 1) {
+        setState(() {
+          showcount = showcount + 0.1;
+        });
+      }
+    }
   }
 }

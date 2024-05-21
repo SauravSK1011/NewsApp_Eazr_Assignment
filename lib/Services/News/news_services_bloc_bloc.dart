@@ -15,6 +15,8 @@ class NewsServicesBlocBloc
   NewsServicesBlocBloc() : super(NewsServicesBlocInitial()) {
     on<NewsServicesBlocEvent>((event, emit) async {
       if (event is loadNewsServicesEvent) {
+        emit(NewsServicesBlocInitial());
+        print("object");
         String baseUrl =
             'https://newsapi.org/v2/everything?q=${event.query}&apiKey=726d346b6f014f24ae6a429610135e52';
 
