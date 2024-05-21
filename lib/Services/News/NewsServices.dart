@@ -7,7 +7,7 @@ import 'package:newsappassignment/Models/NewsModel.dart';
 class NewsServices {
   static Future<NewsModel?> fetchNews(String quarry) async {
     String baseUrl =
-        '1https://newsapi.org/v2/everything?q=$quarry&apiKey=726d346b6f014f24ae6a429610135e52';
+        'https://newsapi.org/v2/everything?q=$quarry&apiKey=726d346b6f014f24ae6a429610135e52';
 
     try {
       final response = await http.get(Uri.parse(baseUrl));
@@ -19,7 +19,7 @@ class NewsServices {
         Fluttertoast.showToast(
         msg: "Failed to fetch news: ${response.statusCode}",
         toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
+        gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.red,
         textColor: Colors.white,
@@ -31,7 +31,7 @@ class NewsServices {
               Fluttertoast.showToast(
         msg: "Exception while fetching news: $e",
         toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
+        gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.red,
         textColor: Colors.white,
