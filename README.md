@@ -31,3 +31,11 @@ To run the NewsApp_Eazr_Assignment Flutter App locally, follow these steps:
    ```bash
    flutter run
    ```
+
+## Technologies and Methodologies Used
+
+1. Bloc for State Management
+2. Shared Preferences
+3. Public News API (NewsAPI)
+4. Pagination
+5. Error Handling
