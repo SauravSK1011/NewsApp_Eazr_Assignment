@@ -1,5 +1,5 @@
 ## Download APP
-[Download](https://drive.google.com/file/d/14bmE-O-f2R-BQuqy46DCIQ9bf41fIx1m/view?usp=sharing))
+[Download](https://drive.google.com/file/d/14bmE-O-f2R-BQuqy46DCIQ9bf41fIx1m/view?usp=sharing)
 
 ## Getting Started
 
