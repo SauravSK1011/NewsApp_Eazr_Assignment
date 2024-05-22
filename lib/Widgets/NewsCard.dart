@@ -5,7 +5,7 @@ import 'package:newsappassignment/Models/NewsModel.dart';
 import 'package:newsappassignment/Presentation/Article/ArticleScreen.dart';
 import 'package:newsappassignment/Presentation/Category/CategoryScreen.dart';
 
-Widget newscard(Article news,double height, double width,BuildContext context,NewsModel allnews,int initialind) {
+Widget newscard(Article news,double height, double width,BuildContext context,List<Article> allnews,int initialind) {
   return Padding(
     padding: const EdgeInsets.all(12.0),
     child: InkWell(onTap: (){

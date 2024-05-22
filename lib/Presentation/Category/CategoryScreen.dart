@@ -69,7 +69,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                     state.newsServices.articles![ind],
                                     MediaQuery.of(context).size.height,
                                     MediaQuery.of(context).size.width,
-                                    context,state.newsServices,ind);
+                                    context,
+                                    state.newsServices.articles!,
+                                    ind);
                               }),
                         );
                       } else {

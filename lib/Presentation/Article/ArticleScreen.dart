@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:newsappassignment/Models/ArticleModel.dart';
 import 'package:newsappassignment/Models/NewsModel.dart';
 import 'package:newsappassignment/Widgets/ArticleDetail.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ArticleScreen extends StatefulWidget {
   const ArticleScreen({super.key, this.news, this.initialind = 1});
-  final NewsModel? news;
+  final List<Article>? news;
   final int initialind;
 
   @override
@@ -36,8 +37,8 @@ class _ArticleScreenState extends State<ArticleScreen> {
 
   getdata() {
     articaltoshow = [];
-    for (var i = 0; i < widget.news!.articles!.length; i++) {
-      articaltoshow.add(ArticleDetailPage(article: widget.news!.articles![i]));
+    for (var i = 0; i < widget.news!.length; i++) {
+      articaltoshow.add(ArticleDetailPage(article: widget.news![i]));
     }
   }
 

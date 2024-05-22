@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newsappassignment/Models/ArticleModel.dart';
+import 'package:newsappassignment/Services/Save/SaveManager.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:ui' as ui; // Import the dart:ui library
 
@@ -14,6 +16,20 @@ class ArticleDetailPage extends StatefulWidget {
 
 class _ArticleDetailPageState extends State<ArticleDetailPage> {
   bool isBookmarked = false;
+  late SharedPreferences prefs;
+
+  initpref() async {
+    prefs = await SharedPreferences.getInstance();
+    isBookmarked = await ArticleManager().containsArticle(widget.article);
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    initpref();
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,6 +114,10 @@ class _ArticleDetailPageState extends State<ArticleDetailPage> {
                         onPressed: () {
                           setState(() {
                             isBookmarked = !isBookmarked;
+                            print(isBookmarked);
+                            !isBookmarked
+                                ? ArticleManager().removeArticle(widget.article)
+                                : ArticleManager().addArticle(widget.article);
                           });
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
@@ -168,7 +188,6 @@ class _ArticleDetailPageState extends State<ArticleDetailPage> {
                   ),
                 ),
               ),
-            
           ],
         ),
       ),
