@@ -24,7 +24,7 @@ To run the NewsApp_Eazr_Assignment Flutter App locally, follow these steps:
    flutter pub get
    ```
 
-5. Update the API endpoints in the app code with the local or deployed AIBuddy API URLs.
+5. Connect mobile with pc and enable usb debugging in mobile.
 
 6. Run the app:
 
