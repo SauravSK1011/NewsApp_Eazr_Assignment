@@ -1,16 +1,34 @@
-# newsappassignment
-
-A new Flutter project.
+## Download APP
+[Download](https://drive.google.com/file/d/113lo3dpr9XMmwQ9Mguav5OuFujy_RuWL/view?usp=drive_link)
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+To run the AIBuddy Flutter App locally, follow these steps:
 
-A few resources to get you started if this is your first Flutter project:
+1. Install Flutter and Dart. Refer to the [Flutter documentation](https://flutter.dev/docs/get-started/install) for instructions.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+2. Clone the repository:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+   ```bash
+   git clone https://github.com/SauravSK1011/AIBuddy-AI_Chatbot.git
+   ```
+
+3. Navigate to the project directory:
+
+   ```bash
+   cd AIBuddy-Flutter-App
+   ```
+
+4. Install dependencies:
+
+   ```bash
+   flutter pub get
+   ```
+
+5. Update the API endpoints in the app code with the local or deployed AIBuddy API URLs.
+
+6. Run the app:
+
+   ```bash
+   flutter run
+   ```
