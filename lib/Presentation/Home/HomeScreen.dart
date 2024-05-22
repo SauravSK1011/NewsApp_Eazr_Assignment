@@ -130,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 builder: (context, state) {
               if (state is NewsServicesBlocsuccess) {
                 return Container(
-                  height: MediaQuery.of(context).size.height / 1.7,
+                  height: MediaQuery.of(context).size.height / 1.9,
                   width: MediaQuery.of(context).size.width,
                   child: ListView.builder(
                       controller: sc,

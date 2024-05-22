@@ -50,7 +50,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             ),
             load
                 ? Container(
-                    height: MediaQuery.of(context).size.height / 1.15,
+                    height: MediaQuery.of(context).size.height / 1.3,
                     width: MediaQuery.of(context).size.width,
                     child: BlocBuilder<NewsServicesBlocBloc,
                         NewsServicesBlocState>(builder: (context, state) {

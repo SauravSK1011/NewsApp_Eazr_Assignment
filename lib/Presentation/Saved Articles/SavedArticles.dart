@@ -50,7 +50,7 @@ class _SavedArticlesState extends State<SavedArticles> {
                     ),
               Container(
                 width: screenwidth,
-                height: screenheight - 150,
+                height: screenheight - 200,
                 child: ListView.builder(
                     itemCount: savedArticles.length,
                     itemBuilder: (context, ind) {
