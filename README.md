@@ -10,8 +10,7 @@ To run the AIBuddy Flutter App locally, follow these steps:
 2. Clone the repository:
 
    ```bash
-   git clone https://github.com/SauravSK1011/AIBuddy-AI_Chatbot.git
-   ```
+   git clone https://github.com/SauravSK1011/NewsApp_Eazr_Assignment.git
 
 3. Navigate to the project directory:
 
