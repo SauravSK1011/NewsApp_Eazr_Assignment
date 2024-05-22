@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newsappassignment/Services/News/news_services_bloc_bloc.dart';
+import 'package:newsappassignment/Widgets/AppBar.dart';
 import 'package:newsappassignment/Widgets/NewsCard.dart';
 
 class CategoryScreen extends StatefulWidget {
@@ -30,7 +31,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
     context
         .read<NewsServicesBlocBloc>()
         .add(loadNewsServicesEvent(widget.category));
-    Timer(Duration(seconds: 5), () {
+    Timer(Duration(seconds: 2), () {
       setState(() {
         load = true;
       });
@@ -40,7 +41,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
+      child: Scaffold(appBar: AppBar(title: appBar(context),),
         body: Column(
           children: [
             Text(

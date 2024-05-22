@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newsappassignment/Presentation/Category/CategoryScreen.dart';
 import 'package:newsappassignment/Presentation/Saved%20Articles/SavedArticles.dart';
 import 'package:newsappassignment/Services/News/news_services_bloc_bloc.dart';
+import 'package:newsappassignment/Widgets/AppBar.dart';
 import 'package:newsappassignment/Widgets/NewsCard.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -42,20 +43,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
+      child: Scaffold(appBar: AppBar(title: appBar(context),),
         body: Column(
           children: [
-            Row(
-              children: [
-                IconButton(
-                  icon: Icon(Icons.save),
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => SavedArticles()));
-                  },
-                )
-              ],
-            ),
+            
             Row(
               children: [
                 Flexible(
@@ -139,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 builder: (context, state) {
               if (state is NewsServicesBlocsuccess) {
                 return Container(
-                  height: MediaQuery.of(context).size.height / 1.5,
+                  height: MediaQuery.of(context).size.height / 1.7,
                   width: MediaQuery.of(context).size.width,
                   child: ListView.builder(
                       controller: sc,

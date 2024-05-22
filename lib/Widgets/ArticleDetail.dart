@@ -17,6 +17,13 @@ class ArticleDetailPage extends StatefulWidget {
 class _ArticleDetailPageState extends State<ArticleDetailPage> {
   bool isBookmarked = false;
   late SharedPreferences prefs;
+  Future<void> _launchUrl(link) async {
+    final Uri _url = Uri.parse(link);
+
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
+    }
+  }
 
   initpref() async {
     prefs = await SharedPreferences.getInstance();
@@ -94,97 +101,106 @@ class _ArticleDetailPageState extends State<ArticleDetailPage> {
                 ),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Container(
-                  width: 100,
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(
-                        100), // half the width/height makes it circular
-                  ),
-                  child: Row(
-                    children: [
-                      IconButton(
-                        icon: Icon(
-                          isBookmarked ? Icons.bookmark : Icons.bookmark_border,
-                          color: Colors.white,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                    width: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(
+                          10), // half the width/height makes it circular
+                    ),
+                    child: Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            isBookmarked ? Icons.bookmark : Icons.bookmark_border,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              isBookmarked = !isBookmarked;
+                              print(isBookmarked);
+                              !isBookmarked
+                                  ? ArticleManager().removeArticle(widget.article)
+                                  : ArticleManager().addArticle(widget.article);
+                            });
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(isBookmarked
+                                    ? 'Article Bookmarked'
+                                    : 'Bookmark Removed'),
+                              ),
+                            );
+                          },
                         ),
-                        onPressed: () {
-                          setState(() {
-                            isBookmarked = !isBookmarked;
-                            print(isBookmarked);
-                            !isBookmarked
-                                ? ArticleManager().removeArticle(widget.article)
-                                : ArticleManager().addArticle(widget.article);
-                          });
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(isBookmarked
-                                  ? 'Article Bookmarked'
-                                  : 'Bookmark Removed'),
-                            ),
-                          );
-                        },
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.share,
-                          color: Colors.white,
-                        ),
-                        onPressed: () {
-                          if (widget.article.url != null) {}
-                        },
-                      ),
-                    ],
+                        
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-            if (widget.article.urlToImage != null)
+            if (widget.article.url != null)
               Positioned(
                 bottom: 0,
                 left: 0,
                 right: 0,
-                child: ClipRRect(
-                  borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(20.0)),
-                  child: Stack(
-                    children: [
-                      // Background image
-                      Image.network(
-                        widget.article.urlToImage!,
-                        width: double.infinity,
-                        height: 80,
-                        fit: BoxFit.cover,
-                      ),
-                      // Blur effect
-                      BackdropFilter(
-                        filter:
-                            ui.ImageFilter.blur(sigmaX: 100.0, sigmaY: 100.0),
-                        child: Container(
+                child: GestureDetector(
+                  onTap: () {
+                    _launchUrl(widget.article.url);
+                  },
+                  child: ClipRRect(
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(20.0)),
+                    child: Stack(
+                      children: [
+                        // Background image
+                        Image.network(
                           width: double.infinity,
                           height: 80,
-                          color: Colors.black.withOpacity(0.5),
+                          fit: BoxFit.cover,
+                          widget.article.urlToImage ??
+                              "https://images.pexels.com/photos/326055/pexels-photo-326055.jpeg?auto=compress&cs=tinysrgb&w=600",
+                          errorBuilder: (BuildContext context, Object error,
+                              StackTrace? stackTrace) {
+                            return Image.network(
+                                width: double.infinity,
+                                height: 80,
+                                fit: BoxFit.cover,
+                                "https://icons.veryicon.com/png/o/education-technology/alibaba-big-data-oneui/image-loading-failed-02.png");
+                          },
                         ),
-                      ),
-                      const Center(
-                          child: Column(
-                        children: [
-                          SizedBox(
-                            height: 25,
+                        // Blur effect
+                        BackdropFilter(
+                          filter:
+                              ui.ImageFilter.blur(sigmaX: 100.0, sigmaY: 100.0),
+                          child: Container(
+                            width: double.infinity,
+                            height: 80,
+                            color: Colors.black.withOpacity(0.5),
                           ),
-                          Text(
-                            'Tap to Know More',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      )),
-                    ],
+                        ),
+                        const Center(
+                            child: Column(
+                          children: [
+                            SizedBox(
+                              height: 25,
+                            ),
+                            Text(
+                              'Tap to Know More',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        )),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -194,11 +210,5 @@ class _ArticleDetailPageState extends State<ArticleDetailPage> {
     );
   }
 
-  void _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
+
 }

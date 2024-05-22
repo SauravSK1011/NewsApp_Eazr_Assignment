@@ -24,7 +24,7 @@ Widget newscard(Article news,double height, double width,BuildContext context,Li
                   borderRadius: BorderRadius.circular(25),
                   child: Image.network(
                     news.urlToImage ??
-                        "https://images.pexels.com/photos/326055/pexels-photo-326055.jpeg?auto=compress&cs=tinysrgb&w=600",
+                        "https://icons.veryicon.com/png/o/education-technology/alibaba-big-data-oneui/image-loading-failed-02.png",
                     errorBuilder: (BuildContext context, Object error,
                         StackTrace? stackTrace) {
                       return Image.network(height: height/4.5,width: width,

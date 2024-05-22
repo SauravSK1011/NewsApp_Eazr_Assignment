@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:newsappassignment/Models/ArticleModel.dart';
 import 'package:newsappassignment/Models/NewsModel.dart';
+import 'package:newsappassignment/Widgets/AppBar.dart';
 import 'package:newsappassignment/Widgets/ArticleDetail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -48,7 +49,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
     double screenwidth = MediaQuery.of(context).size.width;
     PageController controller = PageController(initialPage: widget.initialind);
 
-    return Scaffold(
+    return Scaffold(appBar: AppBar(title: appBar(context),),
       body: Stack(
         children: [
           PageView(controller: controller,
