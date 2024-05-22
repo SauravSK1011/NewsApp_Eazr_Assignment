@@ -16,16 +16,22 @@ class ArticleScreen extends StatefulWidget {
 
 class _ArticleScreenState extends State<ArticleScreen> {
   bool isVisible = true;
-  List<Widget> articaltoshow = [];
+  List<Widget> articaltoshow = [];  Timer? timer;
+
   @override
   void initState() {
     getdata();
-    Timer(Duration(seconds: 5), () {
+   timer= Timer(Duration(seconds: 5), () {
       setState(() {
         isVisible = false;
       });
     });
     super.initState();
+  }
+  @override
+  void dispose() {
+    timer?.cancel();
+    super.dispose();
   }
 
   getdata() {

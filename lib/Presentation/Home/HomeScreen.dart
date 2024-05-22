@@ -37,12 +37,45 @@ class _HomeScreenState extends State<HomeScreen> {
     sc.addListener(scrolllissner);
   }
 
+
+  String searchquary = "";
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         body: Column(
           children: [
+            Row(
+              children: [
+                Flexible(
+                  flex: 1,
+                  child: TextField(onSubmitted: (v){
+
+                    Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => CategoryScreen(
+                                    category: v,
+                                  )));
+                  },
+
+            
+                    cursorColor: Colors.grey,
+                    decoration: InputDecoration(
+                        fillColor: Colors.white,
+                        filled: true,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide.none),
+                        hintText: 'Search',
+                        hintStyle: TextStyle(color: Colors.grey, fontSize: 18),
+                        prefixIcon: Container(
+                          padding: EdgeInsets.all(15),
+                          child: Icon(Icons.search),
+                          width: 18,
+                        )),
+                  ),
+                ),
+              ],
+            ),
             const Row(
               children: [
                 Padding(
@@ -109,7 +142,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         return newscard(
                             state.newsServices.articles![ind],
                             MediaQuery.of(context).size.height,
-                            MediaQuery.of(context).size.width,context,state.newsServices,ind);
+                            MediaQuery.of(context).size.width,
+                            context,
+                            state.newsServices,
+                            ind);
                       }),
                 );
               } else {
