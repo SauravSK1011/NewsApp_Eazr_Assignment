@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newsappassignment/Presentation/Home/HomeScreen.dart';
 import 'package:newsappassignment/Services/News/news_services_bloc_bloc.dart';

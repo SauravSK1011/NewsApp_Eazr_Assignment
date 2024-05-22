@@ -66,7 +66,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: 120,
                       child: InkWell(
                         onTap: () {
-
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => CategoryScreen(
                                     category: newsCategories[ind],
@@ -107,7 +106,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           (state.newsServices.articles!.length * showcount)
                               .toInt()),
                       itemBuilder: (context, ind) {
-                        return newscard(state.newsServices.articles![ind]);
+                        return newscard(
+                            state.newsServices.articles![ind],
+                            MediaQuery.of(context).size.height,
+                            MediaQuery.of(context).size.width,context,state.newsServices,ind);
                       }),
                 );
               } else {

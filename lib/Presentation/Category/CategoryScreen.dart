@@ -49,11 +49,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
             ),
             load
                 ? Container(
-                    height: MediaQuery.of(context).size.height/1.15,
+                    height: MediaQuery.of(context).size.height / 1.15,
                     width: MediaQuery.of(context).size.width,
-                    child:
-                        BlocBuilder<NewsServicesBlocBloc, NewsServicesBlocState>(
-                            builder: (context, state) {
+                    child: BlocBuilder<NewsServicesBlocBloc,
+                        NewsServicesBlocState>(builder: (context, state) {
                       if (state is NewsServicesBlocsuccess) {
                         return Container(
                           height: MediaQuery.of(context).size.height / 1.5,
@@ -67,7 +66,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                       .toInt()),
                               itemBuilder: (context, ind) {
                                 return newscard(
-                                    state.newsServices.articles![ind]);
+                                    state.newsServices.articles![ind],
+                                    MediaQuery.of(context).size.height,
+                                    MediaQuery.of(context).size.width,
+                                    context,state.newsServices,ind);
                               }),
                         );
                       } else {
